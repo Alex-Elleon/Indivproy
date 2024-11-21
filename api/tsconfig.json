@@ -1,6 +1,6 @@
 {
   "exclude":["node_modules"],
-  "include":["index.d.ts","src/**/*.ts"],
+  "include":["index.d.ts","src/**/*.ts", "src/GlobalTypes.ts"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
