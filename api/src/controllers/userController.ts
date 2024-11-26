@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken"
 import { Request, Response } from "express";
 import { UserModel } from "../models/UsersModel";
 
@@ -6,7 +7,7 @@ export const registerUsers = async (req:Request, res:Response):Promise<void> =>{
         //Primero debemos validar que los datos existen
         const name = req.body.name
         const email = req.body.email
-        const lastName= req.body.lastName
+        const lastNames= req.body.lastNames
         const password = req.body.password
         const rol = req.body.rol
 
@@ -19,7 +20,7 @@ export const registerUsers = async (req:Request, res:Response):Promise<void> =>{
         }
         
 
-        if(!name || !email || !lastName || !password || !rol){
+        if(!name || !email || !lastNames || !password || !rol){
              res.status(400).json({
                 msg:"Faltan datos para crear un usuario"
         })
@@ -37,17 +38,18 @@ export const registerUsers = async (req:Request, res:Response):Promise<void> =>{
     }
     
 
-    await UserModel .create({
+    const user = await UserModel .create({
             name,
             email,
-            lastName,
+            lastNames,
             password,
             rol
     }) 
+    const token = jwt.sign(JSON.stringify(user), "shhhh");
 
 
          res.status(200).json({
-        msg : "¡Usuario registrado con exito!"
+        msg : "¡Usuario registrado con exito!", token
     })
     return
     } catch (error) {
