@@ -18,6 +18,7 @@ const App = () => {
   const onSubmit = async () => {
     try {
       await axios.post("http://localhost:4000/users/login", data)
+      alert("Inicio de sesion correcto")
       navigate("/home")
   } catch (error) {
    alert("Hubo un error")  
