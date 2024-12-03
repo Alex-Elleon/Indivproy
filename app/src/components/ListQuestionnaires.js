@@ -3,52 +3,7 @@ import { Card, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 
 export const ListQuestionnaires = ({ rol }) => {
 
-    const questionnaires = [
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-        {
-            name: "Ejemplo 1",
-            description: "Esta es una descipcion de ejemplo"
-        },
-    ]
+    const questionnaires = []
 
     useEffect(() => {
         const url = rol == "administrator" ? "/api/get-all-questionnaires" : "/api/get-questionnaires-by-user";

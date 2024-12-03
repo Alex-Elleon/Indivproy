@@ -148,7 +148,7 @@ export const getOptions = async (req: Request, res: Response): Promise<void> => 
 
 
 
-export const createAnwerQuestionnaire = async (req: Request, res: Response): Promise<void> => {
+export const createAnswer = async (req: Request, res: Response): Promise<void> => {
 
     const questionnaireId = req.body.questionnaireId
     const questionId = req.body.questionId
@@ -171,14 +171,14 @@ export const createAnwerQuestionnaire = async (req: Request, res: Response): Pro
             return
         }
 
-        const getAnswerQuestionnaires = await UserModel.create({
+        const getAnswers = await UserModel.create({
             questionnaireId,
             questionId,
             rol,
             answer
         })
         res.status(200).json({
-            msg: "¡Respuesta creada con exito!", getAnswerQuestionnaires
+            msg: "¡Respuesta creada con exito!", getAnswers
         })
         return
     } catch (error) {
@@ -189,7 +189,35 @@ export const createAnwerQuestionnaire = async (req: Request, res: Response): Pro
         return
     }
 
-}   
+}
+
+
+export const getAnswers = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const answers = await UserModel.findOne({questionId : req.body.questionId, questionnaireId : req.body.questionnaireId,
+             rol : req.body.rol, answer : req.body.answer})
+
+        if (!answers) {
+
+            res.status(400).json({
+                msg: "No hay coincidencias en el sistema"
+            })
+            return;
+        }
+        res.status(200).json({
+            msg: "Se obtuvo la respuesta con exito", answers
+        })
+        return;
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: "Hubo un error al obtener la respuesta"
+        })
+        return;
+    }
+
+}
 
 
 
