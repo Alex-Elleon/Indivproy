@@ -49,7 +49,7 @@ const router = createBrowserRouter([
 const user = {
   name:"Jesus",
   logined:true,
-  rol:"administrator"
+  rol:"client"
 };
 localStorage.user = JSON.stringify(user);
 

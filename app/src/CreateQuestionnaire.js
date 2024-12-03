@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Card, Container, Form, Row, Col, Button, InputGroup, CloseButton, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { AnwerQuestionnaire } from './components/AnwerQuestionnaire';
+import axios from 'axios';
 
 export const CreateQuestionnaire = () => {
+
 
     const [showQuestionnaire, setShowQuestionnaire] = useState(false);
 
@@ -16,7 +18,8 @@ export const CreateQuestionnaire = () => {
                 options: ["Opción 1"],
                 isMandatory: false,
             }
-        ]
+        ],
+        userId : JSON.parse(localStorage.user).userId
     });
 
     const onChangeTitle = (e) => {
@@ -60,8 +63,9 @@ export const CreateQuestionnaire = () => {
         setCreateQuestionnaire({ ...data });
     }
 
-    const sendData = () => {
+    const sendData = async () => {
         console.log(createQuestionnaire);
+        await axios.post("http://localhost:4000/questionnaires/createQuestionnaire", createQuestionnaire)
     }
 
     const onChangeOptionTitle = (e,iq,io)=>{
